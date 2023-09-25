@@ -6,11 +6,7 @@ sudo apt-get install g++ libgnutls28-dev uuid-dev uuid-runtime cmake gnutls-dev 
 
 git clone --recurse-submodules https://github.com/GothenburgBitFactory/taskserver.git
 
-cmake -DCMAKE_BUILD_TYPE=release .
-
-cd taskserver/
-
-> edit .bashrc and add this line: `export TASKDDATA=/var/taskd`
+> edit .bashrc and add this line: export TASKDDATA=/var/taskd
 
 source .bashrc
 
@@ -24,9 +20,7 @@ sudo make install
 
 sudo mkdir -p $TASKDDATA
 
-taskd init
-
-sudo chown YOUR_USER /var/taskd
+sudo chown HOST_USER /var/taskd
 
 taskd init
 
@@ -57,8 +51,6 @@ taskd config --force server.key $TASKDDATA/server.key.pem
 taskd config --force server.crl $TASKDDATA/server.crl.pem
 
 taskd config --force ca.cert $TASKDDATA/ca.cert.pem
-
-cd $TASKDDATA/..
 
 taskd config --force log /var/taskd/taskd.log
 
@@ -96,7 +88,7 @@ sudo  systemctl enable taskd.service
 
 taskd add org YOUR_ORGNAME
 
-sudo adduser YOUR_USER taskdGroup 
+sudo adduser HOST_USER taskdGroup 
 
 sudo chgrp -R taskdGroup orgs/
 
